@@ -7,6 +7,7 @@ import Jobs from "./pages/Jobs";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { Toaster } from "./components/ui/toaster";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,6 +30,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Routes>
+        <Toaster />
       </QueryClientProvider>
     </BrowserRouter>
   )

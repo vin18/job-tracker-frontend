@@ -5,6 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
+import { toast } from "./ui/use-toast"
+import { useNavigate } from "react-router-dom"
 
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -29,15 +31,22 @@ const registerSchema = z.object({
 
 const useRegister = () => {
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
   
     return useMutation({
-      mutationFn: (values: z.infer<typeof registerSchema>) => axios.post(`http://localhost:5000/api/v1/auth/register`, values),
-      onSuccess: (data) => {
+      mutationFn: (values: z.infer<typeof registerSchema>) => axios.post(`http://localhost:5000/api/v1/auth/registeer`, values),
+      onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['auth'] })
-        console.log("Signed up", data)
+        toast({ 
+            title: "Registered successfully"
+        })
+        navigate(`/dashboard`)
       },
       onError: (error) => {
-        console.log("Error", error)
+        toast({ 
+            variant: 'destructive',
+            title: error.message
+        })
       }
     })
 }

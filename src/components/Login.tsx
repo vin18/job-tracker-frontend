@@ -4,12 +4,15 @@ import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import axios from "axios"
+import { useToast } from "./ui/use-toast"
+import { useNavigate } from 'react-router-dom'
 
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import axios from "axios"
+
 
 const loginSchema = z.object({
     email: z
@@ -23,15 +26,24 @@ const loginSchema = z.object({
 
 const useLogin = () => {
     const queryClient = useQueryClient()
+    const { toast } = useToast()
+    const navigate = useNavigate()
   
     return useMutation({
       mutationFn: (values: z.infer<typeof loginSchema>) => axios.post(`http://localhost:5000/api/v1/auth/login`, values),
-      onSuccess: (data) => {
+      onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['auth'] })
-        console.log("Logged in", data)
+        toast({ 
+            variant: "destructive",
+            title: "Logged in successfully"
+        })
+        navigate(`/dashboard`)
       },
       onError: (error) => {
-        console.log("Error", error)
+        toast({ 
+            variant: "destructive",
+            title: error.message
+        })
       }
     })
 }
