@@ -1,5 +1,9 @@
+import Sidebar from "@/components/ui/sidebar";
+
 function Dashboard() {
-    return <p>Dashboard page</p>
+    return (
+        <Sidebar />
+    )
 }
 
 export default Dashboard;
