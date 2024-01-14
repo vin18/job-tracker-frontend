@@ -3,13 +3,15 @@
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import axios from "axios"
 
-const formSchema = z.object({
+const loginSchema = z.object({
     email: z
         .string()
         .min(1, { message: "Email is required" })
@@ -19,17 +21,34 @@ const formSchema = z.object({
         .min(1, { message: 'Password is required' })
 })
 
+const useLogin = () => {
+    const queryClient = useQueryClient()
+  
+    return useMutation({
+      mutationFn: (values: z.infer<typeof loginSchema>) => axios.post(`http://localhost:5000/api/v1/auth/login`, values),
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ['auth'] })
+        console.log("Logged in", data)
+      },
+      onError: (error) => {
+        console.log("Error", error)
+      }
+    })
+}
+
 export default function Login() {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const { mutate: login } = useLogin()
+
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
           email: "",
           password: "",
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    function onSubmit(values: z.infer<typeof loginSchema>): any {
+        login(values)
     }
 
     return (
