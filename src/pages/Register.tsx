@@ -1,5 +1,7 @@
-function Register() {
-    return <p>Register page</p>
+import Register from "@/components/Register";
+
+function RegisterPage() {
+    return <Register />
 }
 
-export default Register;
+export default RegisterPage;
