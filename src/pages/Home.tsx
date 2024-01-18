@@ -14,7 +14,7 @@ export default function LoginPage() {
             </span>
           </Link>
           <Link
-            to="/signin"
+            to="/login"
             className="leading-2 mr-4 inline-flex h-[38px] items-center overflow-hidden rounded-full bg-gray-900 px-4 py-1 text-sm font-medium text-white transition hover:bg-primary/90"
           >
             Sign in
@@ -56,13 +56,13 @@ export default function LoginPage() {
           </p>
           <div className="mt-8 flex justify-center">
             <Link
-              to="/signup"
+              to="/login"
               className="inline-flex h-[38px] items-center justify-center rounded-full bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-primary/90 hover:shadow"
             >
               Get started
             </Link>
             <Link
-              to="/signup"
+              to="/github"
               className="ml-6 inline-flex h-[38px] items-center justify-center  rounded-full bg-white/0 px-4 py-2.5 text-sm font-medium text-slate-900 ring-1 ring-slate-900/10 hover:bg-gray-100 hover:shadow"
             >
               <svg
