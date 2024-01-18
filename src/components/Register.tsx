@@ -25,6 +25,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import useRegister from "@/hooks/useLogin";
 
 const registerSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -36,31 +37,8 @@ const registerSchema = z.object({
   password: z.string().min(1, { message: "Password is required" }),
 });
 
-const useRegister = () => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-
-  return useMutation({
-    mutationFn: (values: z.infer<typeof registerSchema>) =>
-      axios.post(`http://localhost:5000/api/v1/auth/registeer`, values),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
-      toast({
-        title: "Registered successfully",
-      });
-      navigate(`/dashboard`);
-    },
-    onError: (error) => {
-      toast({
-        variant: "destructive",
-        title: error.message,
-      });
-    },
-  });
-};
-
 export default function Register() {
-  const { mutate: register } = useRegister();
+  const register = useRegister();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),

@@ -1,8 +1,15 @@
 import Footer from "@/components/Footer";
 import Register from "@/components/Register";
-import { Link } from "react-router-dom";
+import { useUser } from "@/hooks/useUser";
+import { Link, Navigate } from "react-router-dom";
 
 function RegisterPage() {
+  const user = useUser();
+
+  if (user) {
+    return <Navigate to={"/dashboard"} replace />;
+  }
+
   return (
     <>
       <div

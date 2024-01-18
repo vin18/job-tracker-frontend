@@ -3,10 +3,6 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { useToast } from "./ui/use-toast";
-import { useNavigate } from "react-router-dom";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -18,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import useLogin from "@/hooks/useLogin";
 
 const loginSchema = z.object({
   email: z
@@ -27,33 +24,8 @@ const loginSchema = z.object({
   password: z.string().min(1, { message: "Password is required" }),
 });
 
-const useLogin = () => {
-  const queryClient = useQueryClient();
-  const { toast } = useToast();
-  const navigate = useNavigate();
-
-  return useMutation({
-    mutationFn: (values: z.infer<typeof loginSchema>) =>
-      axios.post(`http://localhost:5000/api/v1/auth/login`, values),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
-      toast({
-        variant: "destructive",
-        title: "Logged in successfully",
-      });
-      navigate(`/dashboard`);
-    },
-    onError: (error) => {
-      toast({
-        variant: "destructive",
-        title: error.message,
-      });
-    },
-  });
-};
-
 export default function Login() {
-  const { mutate: login } = useLogin();
+  const login = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),

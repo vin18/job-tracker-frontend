@@ -1,8 +1,15 @@
 import Footer from "@/components/Footer";
 import Login from "@/components/Login";
-import { Link } from "react-router-dom";
+import { useUser } from "@/hooks/useUser";
+import { Link, Navigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const user = useUser();
+
+  if (user) {
+    return <Navigate to={"/dashboard"} replace />;
+  }
+
   return (
     <>
       <div

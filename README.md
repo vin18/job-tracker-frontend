@@ -17,14 +17,36 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+# Tech stack
+
+Frontend: Typescript, Reactjs, Shadcn, React Query
+Backend: Typescript, Nodejs, Expressjs, MongoDB
+
+# Features
+
+- Authentication and Authorization
+- Dashboard statistics
+- Read, Create, Update and Delete job applications
+- List view of job applications with sorting and pagination
+- User profile management
+- Email feature - Send email reminder 1 day prior to interviews
+- Get reports in CSV
+
+# Bonus
+
+- Add unit test cases on frontend and backend
+- Build using docker
+- Swagger documentation
+- Bookmark feature
