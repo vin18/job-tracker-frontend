@@ -1,11 +1,8 @@
 import { useUser } from "@/hooks/useUser";
 import { Navigate, Outlet } from "react-router-dom";
+import Sidebar from "./ui/sidebar";
 
-interface Props {
-  redirectPath?: string;
-}
-
-const ProtectedRoute = ({ redirectPath = "/login" }: Props) => {
+const ProtectedRoute = ({ redirectPath = "/login" }) => {
   const user = useUser();
 
   if (!user) {
@@ -15,6 +12,7 @@ const ProtectedRoute = ({ redirectPath = "/login" }: Props) => {
   return (
     <div className="w-screen h-screen flex flex-col items-stretch justify-start">
       <div className="w-full grow">
+        <Sidebar />
         <Outlet />
       </div>
     </div>
