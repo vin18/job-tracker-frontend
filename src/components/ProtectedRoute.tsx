@@ -10,7 +10,7 @@ const ProtectedRoute = ({ redirectPath = "/login" }) => {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col items-stretch justify-start">
+    <div className="w-screen h- flex flex-col items-stretch justify-start">
       <div className="w-full grow">
         <Sidebar />
         <Outlet />

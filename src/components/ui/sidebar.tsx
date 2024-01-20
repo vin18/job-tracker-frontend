@@ -62,7 +62,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="h-screen w-screen bg-white dark:bg-slate-900">
+    <div className="bg-white dark:bg-slate-900">
       <aside
         id="sidebar"
         className="fixed left-0 top-0 z-40 h-screen w-64 transition-transform"
