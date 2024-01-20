@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Toaster } from "./components/ui/toaster";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AppLayout from "./components/AppLayout";
 
 const queryClient = new QueryClient({
   defaultOptions: {
