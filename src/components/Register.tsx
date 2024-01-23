@@ -113,6 +113,7 @@ export default function Register() {
           )}
         />
 
+        {/* TODO: Add loading state */}
         <Button className="w-full mt-4" type="submit">
           Create account
         </Button>

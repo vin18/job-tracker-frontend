@@ -1,4 +1,5 @@
 const USER_KEY = "user";
-const JOB_KEY = "user";
+const JOBS_KEY = "jobs";
+const JOB_KEY = "job";
 
-export { USER_KEY, JOB_KEY };
+export { USER_KEY, JOBS_KEY, JOB_KEY };

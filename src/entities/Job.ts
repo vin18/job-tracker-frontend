@@ -1,5 +1,5 @@
 export type Job = {
-  _id: string;
+  _id?: string;
   company: string;
   position: string;
   jobStatus: string;

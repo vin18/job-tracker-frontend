@@ -1,3 +1,4 @@
+import { AddJobDialog } from "@/components/AddJobDialog";
 import { columns } from "@/components/jobs-listing/columns";
 import { DataTable } from "@/components/jobs-listing/data-table";
 import { useJobs } from "@/hooks/useJobs";
@@ -47,10 +48,13 @@ import { useJobs } from "@/hooks/useJobs";
 
 function Jobs() {
   const jobs = useJobs();
+  console.log(jobs);
 
   return (
     <div className="px-32 pt-4 ml-64 h-screen">
       <DataTable columns={columns} data={jobs} />
+      {/* <Button>Add Job</Button> */}
+      <AddJobDialog />
     </div>
   );
 }

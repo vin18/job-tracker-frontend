@@ -1,9 +1,7 @@
-import Account from "@/components/Account";
-
 function Profile() {
   return (
     <div>
-      <Account />
+      <p>Profile</p>
     </div>
   );
 }

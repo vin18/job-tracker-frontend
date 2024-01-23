@@ -70,10 +70,12 @@ export default function Login() {
           )}
         />
 
+        {/* TODO: Add loading state */}
         <Button variant="secondary" className="w-full mb-4" type="submit">
           Login as guest user
         </Button>
 
+        {/* TODO: Add loading state */}
         <Button className="w-full" type="submit">
           Login to your account
         </Button>
